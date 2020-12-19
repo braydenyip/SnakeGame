@@ -1,11 +1,14 @@
 package main.java;
 
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 
-public class Tile {
+public class Tile extends JComponent {
     public static final int EMPTY_STATE = 0;
     public static final int SNAKE_STATE = 1;
     public static final int APPLE_STATE = 2;
+
+    private static int tileSideLength = 30;
 
     private Point location;
     private int state;
@@ -28,12 +31,14 @@ public class Tile {
         return state;
     }
 
-    public Point getLocation() {
-        return location;
-    }
-
-    public void setLocation(Point location) {
-        this.location = location;
+    public Color getColour() {
+        if (state == SNAKE_STATE) {
+            return Color.yellow;
+        } else if (state == APPLE_STATE) {
+            return Color.red;
+        } else {
+            return Color.green;
+        }
     }
 
     public void setState(int state) {
@@ -52,4 +57,15 @@ public class Tile {
         return state == EMPTY_STATE;
     }
 
+    public static void setTileSideLength(int newLength) {
+        tileSideLength = newLength;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(getColour());
+        Rectangle rect = new Rectangle(0, 0, tileSideLength, tileSideLength);
+        g2.draw(rect);
+    }
 }

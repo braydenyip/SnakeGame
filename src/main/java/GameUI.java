@@ -8,12 +8,18 @@ public class GameUI extends JFrame {
     public static final int WIDTH = 1000;
     private Container theContentPane;
     private SnakeGame theGame;
+    private JPanel theGamePanel;
 
     public GameUI() {
-        setDefaults();
+        this(new SnakeGame());
     }
 
-    public void setDefaults() {
+    public GameUI(SnakeGame aGame) {
+        setDefaults(aGame);
+    }
+
+    public void setDefaults(SnakeGame aGame) {
+        setTheGame(aGame);
         setTitle("Snake");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,24 +29,34 @@ public class GameUI extends JFrame {
     }
 
     public void setPanels() {
-        JPanel gamePanel = new JPanel();
-        gamePanel.setBackground(Color.black);
+        theGamePanel = new JPanel(new GridLayout(theGame.getRows(), theGame.getCols()));
+        theGamePanel.setBackground(Color.black);
         JPanel scorePanel = new JPanel();
         JLabel scoreLabel = new JLabel("Score:    Best Score:   ");
         scoreLabel.setBackground(Color.white);
         scorePanel.add(scoreLabel);
-        theContentPane.add(gamePanel, BorderLayout.CENTER);
+        theContentPane.add(theGamePanel, BorderLayout.CENTER);
         theContentPane.add(scorePanel, BorderLayout.PAGE_START);
     }
 
-    public void setTheGame(SnakeGame gm) {
-        theGame = gm;
+
+    public void setTheGame(SnakeGame game) {
+        theGame = game;
+    }
+
+    public void setTiles() {
+        Tile.setTileSideLength((HEIGHT - 50) / theGame.getRows());
+        for (int y = 0; y < theGame.getRows(); y++) {
+            for (Tile tile : theGame.getGameBoard().get(y)) {
+                theGamePanel.add(tile);
+            }
+        }
     }
 
     public static void main(String[] args) {
-        GameUI snakeGameUI = new GameUI();
         SnakeGame theGame = new SnakeGame();
-        snakeGameUI.setTheGame(theGame);
+        GameUI snakeGameUI = new GameUI(theGame);
+        snakeGameUI.setTiles();
         snakeGameUI.setVisible(true);
     }
 }
