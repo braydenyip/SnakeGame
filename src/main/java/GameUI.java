@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameUI extends JFrame {
-    public static final int HEIGHT = 600;
-    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 480;
+    public static final int WIDTH = 600;
     private Container theContentPane;
     private SnakeGame theGame;
     private JPanel theGamePanel;
@@ -45,7 +45,7 @@ public class GameUI extends JFrame {
     }
 
     public void setTiles() {
-        Tile.setTileSideLength((HEIGHT - 50) / theGame.getRows());
+        Tile.setTileSideLength(HEIGHT / theGame.getRows());
         for (int y = 0; y < theGame.getRows(); y++) {
             for (Tile tile : theGame.getGameBoard().get(y)) {
                 theGamePanel.add(tile);

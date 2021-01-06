@@ -7,8 +7,8 @@ import java.util.List;
 
 public class SnakeGame {
 
-    public static final int DEFAULT_ROWS = 25;
-    public static final int DEFAULT_COLS = 50;
+    public static final int DEFAULT_ROWS = 20;
+    public static final int DEFAULT_COLS = 25;
 
     private int rows;
     private int cols;
