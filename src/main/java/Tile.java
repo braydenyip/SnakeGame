@@ -22,11 +22,6 @@ public class Tile extends JComponent {
         state = EMPTY_STATE;
     }
 
-    public Tile(int x, int y, int initialState) {
-        this(x, y);
-        setState(initialState);
-    }
-
     public int getState() {
         return state;
     }
@@ -37,7 +32,7 @@ public class Tile extends JComponent {
         } else if (state == APPLE_STATE) {
             return Color.red;
         } else {
-            return Color.green;
+            return Color.black;
         }
     }
 
@@ -66,6 +61,7 @@ public class Tile extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(getColour());
         Rectangle rect = new Rectangle(0, 0, tileSideLength, tileSideLength);
+        g2.fill(rect);
         g2.draw(rect);
     }
 }
