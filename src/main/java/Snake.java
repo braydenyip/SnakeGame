@@ -1,16 +1,16 @@
 package main.java;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Snake {
 
-    Queue<Tile> linkedSnake = new PriorityQueue<>();
+    Deque<Tile> linkedSnake = new ArrayDeque<>();
+    Character direction;
 
     public Snake(Tile head) {
-        if (head.hasSnake()) {
-            addSegment(head);
-        }
+        addSegment(head);
+        direction = '-';
     }
 
     public int getScore() {
@@ -18,11 +18,14 @@ public class Snake {
     }
 
     public Tile getHead() {
-        return linkedSnake.peek();
+        return linkedSnake.peekFirst();
     }
 
+    public void setDirection(Character newDirection) {
+        direction = newDirection;
+    }
     public void addSegment(Tile seg) {
         seg.setState(Tile.SNAKE_STATE);
-        linkedSnake.add(seg);
+        linkedSnake.addLast(seg);
     }
 }

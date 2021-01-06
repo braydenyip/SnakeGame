@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SnakeGame {
 
@@ -14,6 +15,7 @@ public class SnakeGame {
     private int cols;
     private Snake snake;
     private List<List<Tile>> gameBoard;
+    private Random random;
 
     public SnakeGame() {
         this(DEFAULT_ROWS, DEFAULT_COLS);
@@ -22,6 +24,7 @@ public class SnakeGame {
     public SnakeGame(int gmRows, int gmCols) {
         rows = gmRows;
         cols = gmCols;
+        random = new Random();
         gameBoard = new ArrayList<>();
         for (int y = 0; y < rows; y++) {
             List<Tile> row = new ArrayList<>();
@@ -30,7 +33,19 @@ public class SnakeGame {
             }
             gameBoard.add(row);
         }
-        snake = new Snake(gameBoard.get(rows / 2).get(cols / 2));
+        Point firstApple = generateApple();
+        if (firstApple.equals(new Point(rows / 2, cols / 2))) {
+            snake = new Snake(gameBoard.get((rows / 2) - 1).get((cols / 2) - 1));
+        } else {
+            snake = new Snake(gameBoard.get(rows / 2).get(cols / 2));
+        }
+    }
+
+    public Point generateApple() {
+        int x = random.nextInt(cols);
+        int y = random.nextInt(rows);
+        gameBoard.get(y).get(x).setState(Tile.APPLE_STATE);
+        return(new Point(x, y));
     }
 
     public int getRows() {
