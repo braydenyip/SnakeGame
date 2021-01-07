@@ -20,31 +20,53 @@ public class Snake {
 
     public boolean move() {
         if (direction == 'L') {
-            if (snakeTiles.getFirst().getXTile() <= 0) {
+            if (snakeTiles.getFirst().getXCoord() <= 0) {
                 return false;
             } else {
-
+                changeTiles();
+                return true;
             }
         } else if (direction == 'R') {
-            if (snakeTiles.getFirst().getXTile() >= (SnakeGame.DEFAULT_COLS - 1)) {
+            if (snakeTiles.getFirst().getXCoord() >= (SnakeGame.DEFAULT_COLS - 1)) {
                 return false;
             } else {
-
+                changeTiles();
+                return true;
             }
         } else if (direction == 'U') {
-            if (snakeTiles.getFirst().getYTile() <= 0) {
+            if (snakeTiles.getFirst().getYCoord() <= 0) {
                 return false;
             } else {
-
+                changeTiles();
+                return true;
             }
         } else if (direction == 'D') {
-            if (snakeTiles.getFirst().getYTile() >= (SnakeGame.DEFAULT_ROWS - 1)) {
+            if (snakeTiles.getFirst().getYCoord() >= (SnakeGame.DEFAULT_ROWS - 1)) {
                 return false;
             } else {
-
+                changeTiles();
+                return true;
             }
         }
         return true;
+    }
+
+    public void changeTiles() {
+        Tile removed = snakeTiles.removeLast();
+        removed.setState(Tile.EMPTY_STATE);
+        if (direction == 'L') {
+            snakeTiles.addFirst(matrix.get(removed.getYCoord()).get(removed.getXCoord() - 1));
+            snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
+        } else if (direction == 'R') {
+            snakeTiles.addFirst(matrix.get(removed.getYCoord()).get(removed.getXCoord() + 1));
+            snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
+        } else if (direction == 'U') {
+            snakeTiles.addFirst(matrix.get(removed.getYCoord() - 1).get(removed.getXCoord()));
+            snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
+        } else {
+            snakeTiles.addFirst(matrix.get(removed.getYCoord() + 1).get(removed.getXCoord()));
+            snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
+        }
     }
 
     public void addSegment(Tile seg) {

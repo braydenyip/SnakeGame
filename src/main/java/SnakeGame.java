@@ -56,6 +56,10 @@ public class SnakeGame {
         return cols;
     }
 
+    public Snake getSnake() {
+        return snake;
+    }
+
     public List<List<Tile>> getGameBoard() {
         return gameBoard;
     }

@@ -36,11 +36,11 @@ public class Tile extends JComponent {
         }
     }
 
-    public int getXTile() {
+    public int getXCoord() {
         return (int) location.getX();
     }
 
-    public int getYTile() {
+    public int getYCoord() {
         return (int) location.getY();
     }
 

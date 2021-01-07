@@ -53,11 +53,19 @@ public class GameUI extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
+    public void updateGameUI() {
+        theGamePanel.updateUI();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
         SnakeGame theGame = new SnakeGame();
         GameUI snakeGameUI = new GameUI(theGame);
         snakeGameUI.setTiles();
         snakeGameUI.setVisible(true);
-
+        while (theGame.getSnake().move()) {
+            theGame.getSnake().setDirection('R');
+            Thread.sleep(500);
+            snakeGameUI.updateGameUI();
+        }
     }
 }
