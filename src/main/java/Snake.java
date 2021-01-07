@@ -1,31 +1,54 @@
 package main.java;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 public class Snake {
 
-    Deque<Tile> linkedSnake = new ArrayDeque<>();
     Character direction;
+    Deque<Tile> snakeTiles = new ArrayDeque<>();
+    List<List<Tile>> matrix;
 
-    public Snake(Tile head) {
+    public Snake(Tile head, List<List<Tile>> mat) {
         addSegment(head);
+        matrix = mat;
         direction = '-';
-    }
-
-    public int getScore() {
-        return linkedSnake.size();
-    }
-
-    public Tile getHead() {
-        return linkedSnake.peekFirst();
     }
 
     public void setDirection(Character newDirection) {
         direction = newDirection;
     }
+
+    public boolean move() {
+        if (direction == 'L') {
+            if (snakeTiles.getFirst().getXTile() <= 0) {
+                return false;
+            } else {
+
+            }
+        } else if (direction == 'R') {
+            if (snakeTiles.getFirst().getXTile() >= (SnakeGame.DEFAULT_COLS - 1)) {
+                return false;
+            } else {
+
+            }
+        } else if (direction == 'U') {
+            if (snakeTiles.getFirst().getYTile() <= 0) {
+                return false;
+            } else {
+
+            }
+        } else if (direction == 'D') {
+            if (snakeTiles.getFirst().getYTile() >= (SnakeGame.DEFAULT_ROWS - 1)) {
+                return false;
+            } else {
+
+            }
+        }
+        return true;
+    }
+
     public void addSegment(Tile seg) {
         seg.setState(Tile.SNAKE_STATE);
-        linkedSnake.addLast(seg);
+        snakeTiles.addFirst(seg);
     }
 }

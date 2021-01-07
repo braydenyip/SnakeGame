@@ -58,5 +58,6 @@ public class GameUI extends JFrame {
         GameUI snakeGameUI = new GameUI(theGame);
         snakeGameUI.setTiles();
         snakeGameUI.setVisible(true);
+
     }
 }

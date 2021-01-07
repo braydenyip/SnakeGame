@@ -36,6 +36,14 @@ public class Tile extends JComponent {
         }
     }
 
+    public int getXTile() {
+        return (int) location.getX();
+    }
+
+    public int getYTile() {
+        return (int) location.getY();
+    }
+
     public void setState(int state) {
         this.state = state;
     }

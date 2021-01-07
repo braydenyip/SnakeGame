@@ -35,9 +35,9 @@ public class SnakeGame {
         }
         Point firstApple = generateApple();
         if (firstApple.equals(new Point(rows / 2, cols / 2))) {
-            snake = new Snake(gameBoard.get((rows / 2) - 1).get((cols / 2) - 1));
+            snake = new Snake(gameBoard.get((rows / 2) - 1).get((cols / 2) - 1), gameBoard);
         } else {
-            snake = new Snake(gameBoard.get(rows / 2).get(cols / 2));
+            snake = new Snake(gameBoard.get(rows / 2).get(cols / 2), gameBoard);
         }
     }
 
