@@ -73,8 +73,8 @@ public class GameUI extends JFrame {
         GameUI snakeGameUI = new GameUI(theGame);
         snakeGameUI.setTiles();
         snakeGameUI.setVisible(true);
-        while (theGame.getSnake().move()) {
-            theGame.getSnake().setDirection('R');
+        while (theGame.moveSnake()) {
+            theGame.getSnake().setDirection('L');
             Thread.sleep(250);
             snakeGameUI.updateGameUI();
         }

@@ -54,19 +54,41 @@ public class Snake {
     public void changeTiles() {
         Tile removed = snakeTiles.removeLast();
         removed.setState(Tile.EMPTY_STATE);
+        Tile nextTile;
         if (direction == 'L') {
-            snakeTiles.addFirst(matrix.get(removed.getYCoord()).get(removed.getXCoord() - 1));
+            nextTile = matrix.get(removed.getYCoord()).get(removed.getXCoord() - 1);
+            if (nextTile.hasApple()) {
+                addTailSegment(removed);
+            }
+            snakeTiles.addFirst(nextTile);
             snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
         } else if (direction == 'R') {
-            snakeTiles.addFirst(matrix.get(removed.getYCoord()).get(removed.getXCoord() + 1));
+            nextTile = matrix.get(removed.getYCoord()).get(removed.getXCoord() + 1);
+            if (nextTile.hasApple()) {
+                addTailSegment(removed);
+            }
+            snakeTiles.addFirst(nextTile);
             snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
         } else if (direction == 'U') {
-            snakeTiles.addFirst(matrix.get(removed.getYCoord() - 1).get(removed.getXCoord()));
+            nextTile = matrix.get(removed.getYCoord() - 1).get(removed.getXCoord());
+            if (nextTile.hasApple()) {
+                addTailSegment(removed);
+            }
+            snakeTiles.addFirst(nextTile);
             snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
         } else {
-            snakeTiles.addFirst(matrix.get(removed.getYCoord() + 1).get(removed.getXCoord()));
+            nextTile = matrix.get(removed.getYCoord() + 1).get(removed.getXCoord());
+            if (nextTile.hasApple()) {
+                addTailSegment(removed);
+            }
+            snakeTiles.addFirst(nextTile);
             snakeTiles.peekFirst().setState(Tile.SNAKE_STATE);
         }
+    }
+
+    public void addTailSegment(Tile seg) {
+        seg.setState(Tile.SNAKE_STATE);
+        snakeTiles.addLast(seg);
     }
 
     public void addSegment(Tile seg) {

@@ -60,6 +60,9 @@ public class SnakeGame {
         return snake;
     }
 
+    public boolean moveSnake() {
+        return snake.move();
+    }
     public List<List<Tile>> getGameBoard() {
         return gameBoard;
     }
