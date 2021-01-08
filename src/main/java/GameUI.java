@@ -53,6 +53,17 @@ public class GameUI extends JFrame {
         }
     }
 
+    public void displayGameOver() {
+        theGamePanel = new JPanel(new FlowLayout());
+        theGamePanel.setBackground(Color.black);
+        JLabel gameOverLabel = new JLabel("Game Over");
+        gameOverLabel.setFont(new Font("SansSerif", Font.PLAIN, 40));
+        gameOverLabel.setForeground(new Color(148, 12, 12));
+        theGamePanel.add(gameOverLabel);
+        theContentPane.add(theGamePanel);
+        updateGameUI();
+    }
+
     public void updateGameUI() {
         theGamePanel.updateUI();
     }
@@ -64,8 +75,9 @@ public class GameUI extends JFrame {
         snakeGameUI.setVisible(true);
         while (theGame.getSnake().move()) {
             theGame.getSnake().setDirection('R');
-            Thread.sleep(500);
+            Thread.sleep(250);
             snakeGameUI.updateGameUI();
         }
+        snakeGameUI.displayGameOver();
     }
 }
