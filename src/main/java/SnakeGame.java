@@ -63,6 +63,11 @@ public class SnakeGame {
     public boolean moveSnake() {
         return snake.move();
     }
+
+    public void changeDirection(Character c) {
+        snake.setDirection(c);
+    }
+
     public List<List<Tile>> getGameBoard() {
         return gameBoard;
     }
